@@ -23,13 +23,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dialPhoneNumber("082245450689");
             }
-
-            public void dialPhoneNumber(String phoneNumber) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
-            }
         });
 
         findViewById(R.id.imageViewSMS).setOnClickListener(new View.OnClickListener() {
@@ -37,27 +30,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 composeSmsMessage("Pesan dari SMK Telkom Malang");
             }
-
-            public void composeSmsMessage(String message) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra("sms_body", message);
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
-            }
         });
 
         findViewById(R.id.imageViewBrowser).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openWebPage("http://www.smktelkom-mlg.sch.id/");
-            }
-
-            public void openWebPage(String url) {
-                Uri webpage = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
             }
         });
 
@@ -67,6 +45,28 @@ public class MainActivity extends AppCompatActivity {
                 capturePhoto();
             }
         });
+    }
+
+    public void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+    }
+
+    public void composeSmsMessage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+    }
+
+    public void openWebPage(String url) {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
     }
 
     public void capturePhoto() {
